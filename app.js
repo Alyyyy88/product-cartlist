@@ -2,7 +2,6 @@
 // get image src , category ,name , price
 
 const productCard = document.querySelector(".products_con");
-
 async function getProducts() {
 
   const url = "./data.json";
@@ -41,7 +40,21 @@ async function getProducts() {
                 </div>   
          </div>`;
          productCard.insertAdjacentHTML("beforeend",productHTML);
-    })
+
+
+    });
+
+    document.addEventListener("click", (event) => {
+      const clickedBtn = event.target.closest(".cart__btn_con");
+      if (clickedBtn) {
+        const product = clickedBtn.closest(".product");
+        const quantityBtn = product.querySelector(".cart_quantity"); 
+        const product_img = product.querySelector(".product_img"); 
+        clickedBtn.classList.add("nonactive");
+        quantityBtn.classList.add("active"); 
+        product_img.id = "selected";
+      }
+    });
 
   } catch (error) {
     console.log(error);
