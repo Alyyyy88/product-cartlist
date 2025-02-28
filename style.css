@@ -74,8 +74,14 @@ body{
   align-items: center;
   gap: 8px;
   padding: 12px;
+  display: flex;
+}
+
+.items_empty.noncative{
   display: none;
 }
+
+
 
 .items_empty__text{
   color: var(--Rose-500);
@@ -236,4 +242,129 @@ body{
 
 /* NON EMPTY CART */
 
+.non_emptyCART{
+  display: none;
+}
+.non_emptyCART.active{
+  width: 100%;
+  display: flex;
+}
+.cart_list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px;
+  /* background-color: red; */
+  width: 100%;
+  /* gap: 4px; */
+}
+.cart_item__list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px;
+  background-color:white;
+  gap: 8px;
+  margin: 12px 0px;
+}
+
+.product_item__desc_con{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product_item_desc{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.remove-con{
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--Rose-500);
+  font-weight: bold;
+  cursor: pointer;
+  /* margin-bottom: 12px; */
+}
+
+.remove-con img{
+  fill: var(--Rose-900);
+}
+
+hr{
+  border-bottom: .5px solid var(--Rose-100);
+  opacity: 40%;
+}
+
+.product_name{
+  color: var(--Rose-900);
+  font-weight: 600;
+}
+
+.quantity_cart{
+  color: var(--Red-primary);
+  font-weight: 600;
+}
+
+.solo_price{
+  color: var(--Rose-300);
+  font-weight: 300;
+}
+
+.price_per_quantity{
+  color: var(--Rose-400);
+  font-weight: 600;
+}
+
+.order_total_con{
+  width: 100%;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--Rose-500);
+  font-weight: 500;
+}
+
+.order_total{
+  font-size: 26px;
+  color: var(--Rose-900);
+  font-weight: 900;
+}
+
+.carbon_neutral_con{
+  width: 100%;
+  display: flex;
+  background-color:var(--Rose-100);
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 8px;
+  color: var(--Rose-300);
+}
+
+.carbon_neutral_text{
+  color: var(--Rose-900);
+  font-weight: 500;
+}
+
+.order_btn{
+
+  margin: 12px 0px;
+  width: 100%;
+  padding: 20px;
+  border: none;
+  outline: none;
+  background-color: var(--Red-primary);
+  color: var(--Rose-50);
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+}
 
