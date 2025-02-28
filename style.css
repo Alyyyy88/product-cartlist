@@ -133,12 +133,26 @@ body{
 }
 
 .cart__btn_con{
-  width: 120px;
+  width: 190px;
+  border-radius: 70px;
+  padding: 12px 25px;
   display: flex;
-  background-color: red;
-  color: black;
+  justify-content: center;
+  align-items: center;
+  color:var(--Rose-900);
+  font-weight: 600;
+  background-color:var(--Rose-50);
+  border: 1px solid var(--Rose-500);
+  position: absolute;
+  gap: 16px;
+  bottom: 90px;
 }
 
 .cart_icon{
-  width: 10px;
+  max-width: 25px;
+  width: 100%;
+}
+
+.text_btn{
+
 }
