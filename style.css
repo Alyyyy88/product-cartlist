@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root{
+  --Red-primary: hsl(14, 86%, 42%);
+  --Green-primary: hsl(159, 69%, 38%);
+  --Rose-50: hsl(20, 50%, 98%);
+  --Rose-100: hsl(13, 31%, 94%);
+  --Rose-300: hsl(14, 25%, 72%);
+  --Rose-400: hsl(7, 20%, 60%);
+  --Rose-500: hsl(12, 20%, 44%);
+  --Rose-900: hsl(14, 65%, 9%);
+}
+
+body{
+  height: 100vh;
+  background-color: var(--Rose-100);
+  position: relative;
+  font-family: "Red Hat Text", serif;
+}
+
+.container{
+  max-width: 1024px;
+  width: 100%;
+  margin-top: 12px;
+  padding: 20px 40px;
+}
+
+.container .title{
+  padding: 20px;
+}
+
+.products_con{
+  display: grid;
+  grid-template-columns: repeat( 3,minmax(320px , 1fr));
+  gap: 0px;
+  /* background-color: purple; */
+}
+
+.cart_con{
+  max-width: 400px;
+  width: 100%;
+  z-index: 1;
+  padding: 25px 30px;
+  position:absolute;
+  background-color: white;
+  top:50px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+}
+
+.cart_title{
+  color: var(--Red-primary);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+
+.items_empty{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+}
+
+.items_empty__text{
+  color: var(--Rose-500);
+  margin-bottom: 12px;
+}
+
+.cart_title{
+  align-self: flex-start;
+}
+
+.product{
+  max-width: 320px;
+  color:red;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap:8px;
+  /* background-color: black; */
+  padding: 20px 30px;
+}
+
+
+.products_con img{
+  width:270px;
+  object-fit: cover;
+  height: max-content;
+  border-radius: 12px;
+}
+
+.product_desc__con{
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 12px;
+  gap: 4px;
+
+}
+
+.product__title{
+  color: var(--Rose-400);
+  font-size: 14px;
+}
+
+.product__desc{
+  color: var(--Rose-900);
+  font-weight: 500;
+}
+
+.price{
+  color: var(--Red-primary);
+  font-weight: 600;
+  font-size: 14px;
+}
