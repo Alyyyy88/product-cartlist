@@ -87,8 +87,9 @@ body{
 
 .product{
   max-width: 320px;
-  color:red;
+  /* color:red; */
   display: flex;
+  
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -123,7 +124,7 @@ body{
 
 .product__desc{
   color: var(--Rose-900);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .price{
@@ -132,20 +133,30 @@ body{
   font-size: 14px;
 }
 
+/* CART BTN WITH ADD TO CART */
 .cart__btn_con{
-  width: 190px;
+  width: 150px;
   border-radius: 70px;
-  padding: 12px 25px;
+  padding: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   color:var(--Rose-900);
   font-weight: 600;
-  background-color:var(--Rose-50);
+  background-color: var(--Rose-50);
   border: 1px solid var(--Rose-500);
   position: absolute;
   gap: 16px;
   bottom: 90px;
+  cursor: pointer;
+}
+.cart__btn_con:hover{
+  color: var(--Red-primary);
+  border: 2px solid var(--Red-primary);
+}
+
+.cart__btn_con.nonactive{
+  display: none;
 }
 
 .cart_icon{
@@ -154,5 +165,66 @@ body{
 }
 
 .text_btn{
-
+  display:block;
 }
+
+
+
+
+/* CART QUANTITY  */
+.cart_quantity{
+  width: 150px;
+  border-radius: 70px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color:var(--Rose-900);
+  font-weight: 600;
+  background-color:var(--Red-primary);
+  position: absolute;
+  gap: 16px;
+  bottom: 90px;
+  /* right: 90px; */
+  cursor: pointer;
+  display: none;
+}
+
+
+.q_btn{
+  width: 12px;
+  height: 12px;
+}
+.dec_con , .inc_con{
+  width: 15px;
+  padding: 8px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: var(--Red-primary);
+  font-weight: bold;
+}
+.quantity{
+  color: white;
+}
+
+
+.dec_con:hover, .inc_con:hover {
+    background-color: white;
+  }
+  
+.dec_con:hover img, .inc_con:hover img {
+    filter: invert(1);
+  }
+
+
+
+/* .cart__btn_con:hover{
+  border: 1px solid var(--Red-primary);
+  color: var(--Red-primary);
+} */
+
+
