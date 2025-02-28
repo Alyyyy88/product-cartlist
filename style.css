@@ -95,6 +95,7 @@ body{
   gap:8px;
   /* background-color: black; */
   padding: 20px 30px;
+  position: relative;
 }
 
 
@@ -129,4 +130,15 @@ body{
   color: var(--Red-primary);
   font-weight: 600;
   font-size: 14px;
+}
+
+.cart__btn_con{
+  width: 120px;
+  display: flex;
+  background-color: red;
+  color: black;
+}
+
+.cart_icon{
+  width: 10px;
 }
