@@ -234,7 +234,7 @@ body{
     display: flex;
 }
 
-#selected{
+.selected{
   border: 3px solid var(--Red-primary);
 }
 

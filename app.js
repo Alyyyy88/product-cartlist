@@ -40,22 +40,39 @@ async function getProducts() {
 
     document.addEventListener("click", (event) => {
       const clickedBtn = event.target.closest(".cart__btn_con");
+      const cartEmpty = document.querySelector(".items_empty");
+      const cartFill = document.querySelector(".non_emptyCART");
+      const cartCtr = document.querySelector(".cart_ctr");
 
-      // QUANTITY CTR
+      const updateTotalPrice = ()=>{
+        let total = 0;
+        document.querySelectorAll(".cart_list").forEach((item)=>{
+          const price = parseFloat(item.querySelector(".price_per_quantity").textContent.replace("$",""));
+          total+=price;
+        })
+        
 
-      
+        if(total == 0){
+        cartEmpty.classList.remove("noncative");
+        cartFill.classList.remove("active");
+        }else{
+          document.querySelector(".total_order_price").textContent = `${total.toFixed(2)}`;
+        }
+        
+      }
+
+      let ctrList = 1; 
       // CART CHANGING TO QUANTITY
       if (clickedBtn) {
         const product = clickedBtn.closest(".product");
         const quantityBtn = product.querySelector(".cart_quantity");
         const product_img = product.querySelector(".product_img");
+        
         clickedBtn.classList.add("nonactive");
         quantityBtn.classList.add("active");
-        product_img.id = "selected";
+        product_img.classList.add("selected");
 
         let ctr = 1;
-
-
         // GET PRODUCT DETAILS
 
         const productName = product.querySelector(".product__desc").textContent;
@@ -63,25 +80,18 @@ async function getProducts() {
 
 
         //CHANGE CART DYNAMICALLY
-        const cartEmpty = document.querySelector(".items_empty");
-        const cartFill = document.querySelector(".non_emptyCART");
         cartEmpty.classList.add("noncative");
         cartFill.classList.add("active");
 
-       
-
-        // const total = Number(productPrice.textContent * quantity);
-        // console.log(total);
-
-
-        const productAddedCart = `<div class="cart_list">
+        //CREATE ITEM HTML
+        const productAddedCart = `<div class="cart_list"  data-name="${productName}">
            <div class="cart_item__list">
              <p class="product_name">${productName}</p>
              <div class="product_item__desc_con">
                <div class="product_item_desc">
-                 <p class="quantity_cart">x</p>
-                 <p class="solo_price">@${productPrice.textContent}</p>
-                 <p class="price_per_quantity">$ ${total}</p>
+                 <p class="quantity_cart">${ctr}x</p>
+                 <p class="solo_price">@$${productPrice}</p>
+                 <p class="price_per_quantity">$ ${(productPrice * ctr).toFixed(2)}</p>
                </div>
                <div class="remove-con">
                  <img src="./assets/images/icon-remove-item.svg" alt="">
@@ -91,16 +101,73 @@ async function getProducts() {
            <hr>
          </div>`;
 
+         
+
+
+
+         //ADD CART TO IT
          const orderCart = document.querySelector(".non_emptyCART");
-
-
          orderCart.insertAdjacentHTML("afterbegin",productAddedCart);
 
+  
+
+         // GET CART ITEMS
+
+        const cartItem = orderCart.querySelector(`.cart_list[data-name="${productName}"]`);
+        const cartQuantity = cartItem.querySelector(".quantity_cart");
+        const cartTotalPrice = cartItem.querySelector(".price_per_quantity");
+        cartCtr.textContent = Number(ctrList);
 
 
+        //INC AND DEC BTN
 
+        const inc_btn = product.querySelector(".inc_con");
+        const dec_btn = product.querySelector(".dec_con");
+        const quantity = product.querySelector(".quantity");
+
+         // Increase Quantity
+         inc_btn.addEventListener("click", () => {
+          ctr++;
+          quantity.textContent = ctr;
+          cartQuantity.textContent = `${ctr}x`;
+          cartTotalPrice.textContent = `$${(productPrice * ctr).toFixed(2)}`;
+          updateTotalPrice();
+          ctrList++;
+        });
+
+        // Decrease Quantity
+        dec_btn.addEventListener("click", () => {
+          if (ctr > 1) {
+            ctr--;
+            quantity.textContent = ctr;
+            cartQuantity.textContent = `${ctr}x`;
+            cartTotalPrice.textContent = `$${(productPrice * ctr).toFixed(2)}`;
+            updateTotalPrice();
+            ctrList++;
+          }
+        });
+
+        const removeBtn = cartItem.querySelector(".remove-con");
+
+        removeBtn.addEventListener("click",()=>{
+          cartItem.remove();
+          clickedBtn.classList.remove("nonactive"); // Restore "Add to Cart" button
+          quantityBtn.classList.remove("active"); // Hide quantity selector
+          product_img.classList.remove("selected");
+          ctr = 1;
+          quantity.textContent = ctr;
+          updateTotalPrice();
+        })
+
+        
+        updateTotalPrice();
       }
+
+    
     });
+
+
+ 
 
 
     
