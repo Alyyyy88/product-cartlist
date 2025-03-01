@@ -248,6 +248,7 @@ body{
 .non_emptyCART.active{
   width: 100%;
   display: flex;
+  flex-direction: column;
 }
 .cart_list{
   display: flex;
