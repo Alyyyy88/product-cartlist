@@ -42,31 +42,43 @@ async function getProducts() {
       const clickedBtn = event.target.closest(".cart__btn_con");
       const cartEmpty = document.querySelector(".items_empty");
       const cartFill = document.querySelector(".non_emptyCART");
-      const cartCtr = document.querySelector(".cart_ctr");
-
-      const updateTotalPrice = ()=>{
+      const container = document.querySelector(".container");
+      const cartContainer = document.querySelector(".cart_con");
+      const cartConfirmedCon = document.querySelector(".order_confirmed_con");
+      const cartConfirmationList = document.querySelector(".cart__confirmed_list");
+      const updateTotalPrice = () => {
         let total = 0;
-        document.querySelectorAll(".cart_list").forEach((item)=>{
-          const price = parseFloat(item.querySelector(".price_per_quantity").textContent.replace("$",""));
-          total+=price;
-        })
-        
-
-        if(total == 0){
-        cartEmpty.classList.remove("noncative");
-        cartFill.classList.remove("active");
-        }else{
-          document.querySelector(".total_order_price").textContent = `${total.toFixed(2)}`;
+        let totalQuantity = 0;
+        document.querySelectorAll(".cart_list").forEach((item) => {
+          const price = parseFloat(item.querySelector(".price_per_quantity").textContent.replace("$", ""));
+          const quantity = parseInt(item.querySelector(".quantity_cart").textContent); 
+          total += price;
+          totalQuantity += quantity;
+        });
+      
+        document.querySelector(".total_order_price").textContent = `$${total.toFixed(2)}`;
+        document.querySelector(".cart_ctr").textContent = totalQuantity;
+      
+        // Hide cart if empty
+        if (totalQuantity === 0) {
+          document.querySelector(".items_empty").classList.remove("noncative");
+          document.querySelector(".non_emptyCART").classList.remove("active");
         }
-        
-      }
+      };
 
-      let ctrList = 1; 
       // CART CHANGING TO QUANTITY
       if (clickedBtn) {
         const product = clickedBtn.closest(".product");
         const quantityBtn = product.querySelector(".cart_quantity");
         const product_img = product.querySelector(".product_img");
+        const orderBtn  = document.querySelector(".order_btn");
+
+        orderBtn.addEventListener("click",()=>{
+          container.classList.add("blur");
+          cartContainer.classList.add("blur");
+          cartConfirmedCon.classList.add("active");
+          
+        })
         
         clickedBtn.classList.add("nonactive");
         quantityBtn.classList.add("active");
@@ -116,7 +128,6 @@ async function getProducts() {
         const cartItem = orderCart.querySelector(`.cart_list[data-name="${productName}"]`);
         const cartQuantity = cartItem.querySelector(".quantity_cart");
         const cartTotalPrice = cartItem.querySelector(".price_per_quantity");
-        cartCtr.textContent = Number(ctrList);
 
 
         //INC AND DEC BTN
@@ -132,7 +143,6 @@ async function getProducts() {
           cartQuantity.textContent = `${ctr}x`;
           cartTotalPrice.textContent = `$${(productPrice * ctr).toFixed(2)}`;
           updateTotalPrice();
-          ctrList++;
         });
 
         // Decrease Quantity
@@ -143,7 +153,6 @@ async function getProducts() {
             cartQuantity.textContent = `${ctr}x`;
             cartTotalPrice.textContent = `$${(productPrice * ctr).toFixed(2)}`;
             updateTotalPrice();
-            ctrList++;
           }
         });
 
@@ -185,24 +194,25 @@ getProducts();
 
 
 
-
-
-        // // INC QUANTITY BTN
-        // const inc_btn = product.querySelector(".inc_con");
-        // const quantity = product.querySelector(".quantity");
-        // inc_btn.addEventListener("click", () => {
-        //   ctr++;
-        //   quantity.textContent = ctr;
-        // });
-
-        // // DEC QUANTITY BTN
-        // const dec_btn = product.querySelector(".dec_con");
-        // dec_btn.addEventListener("click", () => {
-        //   if (ctr <= 1) {
-        //     dec_btn.disabled = true;
-        //   } else {
-        //     ctr--;
-        //     dec_btn.disabled = false;
-        //     quantity.textContent = ctr;
-        //   }
-        // });
+// <div class="cart__confirmed_item">
+//         <div class="item__content">
+//           <img src="./assets/images/image-cake-desktop.jpg">
+//           <div class="item__content_desc">
+//             <div class="item__content_name">
+//               <p>
+//                 classic Tiramisu
+//               </p>
+//             </div>
+//             <span class="q_confirm_order">
+//               1x
+//             </span>
+//             <span class="q_price_confirm_order">
+//               @5.50
+//             </span>
+//           </div>
+//         </div>
+//         <div class="cart__confirmed_price">
+//           <p>$5.50</p>
+//         </div>
+//       </div>
+//       <hr>   

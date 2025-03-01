@@ -29,8 +29,12 @@ body{
   width: 100%;
   margin-top: 12px;
   padding: 20px 40px;
+  transition: filter 0.3s ease-in-out;
 }
-
+.blur{
+  filter: blur(2px);
+  pointer-events: none;
+}
 .container .title{
   padding: 20px;
 }
@@ -57,6 +61,7 @@ body{
   align-items: center;
   gap: 10px;
   border-radius: 12px;
+  transition: filter 0.3s ease-in-out;
 }
 
 .cart_title{
@@ -367,5 +372,124 @@ hr{
   border-radius: 30px;
   cursor: pointer;
   font-weight: 600;
+} 
+
+
+/* MODAL ORDER CONFIRMED */
+
+.order_confirmed_con{
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 550px;
+  width: 100%;
+  padding: 50px 30px;
+  
+  border-radius: 12px;
+  box-shadow: 10px 10px 19px 6px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  background-color:white;
+  display: none;
+}
+.order_confirmed_con.active{
+  display: block;
+}
+
+.order_confirmed_con img{
+  width: 12%;
+  height: min-content;
+  object-fit: cover;
+}
+.order_confirmed_img{
+  width: 60%;
+  /* margin-bottom: 12px; */
+}
+.order_confirmed_title p{
+  font-size: 26px;
+  color: var(--Rose-900);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.order_confirmed_title span{
+  font-size: 14px;
+  color: var(--Rose-400);
+  font-weight: 500;
+}
+
+.cart__confirmed_list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--Rose-100);
+  padding: 20px 25px;
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.cart__confirmed_item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  margin-bottom: 6px;
+}
+
+.item__content{
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 12px;
+
+}
+
+.order_new_con{
+  align-self: center;
+  width: 100%;
+}
+
+.order_new_con button{
+  width: 100%;
+  padding: 20px;
+  text-transform: capitalize;
+  border-radius: 30px;
+  border: none;
+  color: var(--Rose-100);
+  background-color: var(--Red-primary);
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.item__content_desc{
+  font-size: 14px;
+}
+
+.item__content_name{
+  color: var(--Rose-900);
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-bottom: 6px;
+}
+.q_confirm_order{
+  color: var(--Red-primary);
+  font-weight: 500;
+  margin-right: 12px;
+}
+.q_price_confirm_order{
+  color: var(--Rose-300);
+  font-weight: 500;
+}
+
+.cart__confirmed_price{
+  color: var(--Rose-900);
+  font-weight: 500;
+  font-size: 14px;
 }
 
