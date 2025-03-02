@@ -39,6 +39,8 @@ async function getProducts() {
     });
 
     document.addEventListener("click", (event) => {
+
+      
       const clickedBtn = event.target.closest(".cart__btn_con");
       const cartEmpty = document.querySelector(".items_empty");
       const cartFill = document.querySelector(".non_emptyCART");
@@ -46,6 +48,8 @@ async function getProducts() {
       const cartContainer = document.querySelector(".cart_con");
       const cartConfirmedCon = document.querySelector(".order_confirmed_con");
       const cartConfirmationList = document.querySelector(".cart__confirmed_list");
+
+
       const updateTotalPrice = () => {
         let total = 0;
         let totalQuantity = 0;
@@ -57,6 +61,8 @@ async function getProducts() {
         });
       
         document.querySelector(".total_order_price").textContent = `$${total.toFixed(2)}`;
+        document.querySelector(".total_order_price_confirmed").textContent = `${total.toFixed(2)}`;
+
         document.querySelector(".cart_ctr").textContent = totalQuantity;
       
         // Hide cart if empty
@@ -66,6 +72,7 @@ async function getProducts() {
         }
       };
 
+
       // CART CHANGING TO QUANTITY
       if (clickedBtn) {
         const product = clickedBtn.closest(".product");
@@ -73,11 +80,12 @@ async function getProducts() {
         const product_img = product.querySelector(".product_img");
         const orderBtn  = document.querySelector(".order_btn");
 
+
+
         orderBtn.addEventListener("click",()=>{
           container.classList.add("blur");
           cartContainer.classList.add("blur");
           cartConfirmedCon.classList.add("active");
-          
         })
         
         clickedBtn.classList.add("nonactive");
@@ -142,6 +150,13 @@ async function getProducts() {
           quantity.textContent = ctr;
           cartQuantity.textContent = `${ctr}x`;
           cartTotalPrice.textContent = `$${(productPrice * ctr).toFixed(2)}`;
+          
+          const orderItem = document.querySelector(`.cart__confirmed_item[data-name="${productName}"]`);
+          if (orderItem) {
+            orderItem.querySelector(".q_confirm_order").textContent = `${ctr}x`;
+            orderItem.querySelector(".cart__confirmed_price p").textContent = `$${(productPrice * ctr).toFixed(2)}`;
+          }
+
           updateTotalPrice();
         });
 
@@ -152,7 +167,13 @@ async function getProducts() {
             quantity.textContent = ctr;
             cartQuantity.textContent = `${ctr}x`;
             cartTotalPrice.textContent = `$${(productPrice * ctr).toFixed(2)}`;
-            updateTotalPrice();
+
+            const orderItem = document.querySelector(`.cart__confirmed_item[data-name="${productName}"]`);
+            if (orderItem) {
+              orderItem.querySelector(".q_confirm_order").textContent = `${ctr}x`;
+              orderItem.querySelector(".cart__confirmed_price p").textContent = `$${(productPrice * ctr).toFixed(2)}`;
+            }
+            
           }
         });
 
@@ -165,11 +186,61 @@ async function getProducts() {
           product_img.classList.remove("selected");
           ctr = 1;
           quantity.textContent = ctr;
+          document.querySelector(`.cart__confirmed_item[data-name="${productName}"]`).remove();
           updateTotalPrice();
         })
 
         
         updateTotalPrice();
+
+        const orderListModal = `<div class="cart__confirmed_item" data-name="${productName}">
+            <div class="item__content">
+              <img src="${product_img.src}">
+              <div class="item__content_desc">
+                <div class="item__content_name">
+                  <p>
+                  ${productName}
+                  </p>
+                </div>
+                <span class="q_confirm_order">
+                  ${cartQuantity.textContent}
+                </span>
+                <span class="q_price_confirm_order">
+                  @${productPrice}
+                </span>
+              </div>
+            </div>
+            <div class="cart__confirmed_price">
+              <p>$$${(productPrice * ctr).toFixed(2)}</p>
+            </div>
+            </div>
+            <hr>`;
+        
+
+
+        cartConfirmationList.insertAdjacentHTML("afterbegin" , orderListModal);
+
+
+
+       const closeModal = document.querySelector("#closeMOdal");
+
+       closeModal.addEventListener("click",()=>{
+        container.classList.remove("blur");
+        cartContainer.classList.remove("blur");
+        cartConfirmedCon.classList.remove("active");
+        cartConfirmationList.insertAdjacentHTML("afterbegin" ,"");
+       });
+
+
+       const startNewORder = document.querySelector(".neworder_btn");
+
+       startNewORder.addEventListener("click", () => {
+        location.reload();  
+    });
+
+
+
+
       }
 
     
@@ -194,25 +265,3 @@ getProducts();
 
 
 
-// <div class="cart__confirmed_item">
-//         <div class="item__content">
-//           <img src="./assets/images/image-cake-desktop.jpg">
-//           <div class="item__content_desc">
-//             <div class="item__content_name">
-//               <p>
-//                 classic Tiramisu
-//               </p>
-//             </div>
-//             <span class="q_confirm_order">
-//               1x
-//             </span>
-//             <span class="q_price_confirm_order">
-//               @5.50
-//             </span>
-//           </div>
-//         </div>
-//         <div class="cart__confirmed_price">
-//           <p>$5.50</p>
-//         </div>
-//       </div>
-//       <hr>   
